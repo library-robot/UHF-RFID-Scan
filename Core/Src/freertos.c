@@ -49,6 +49,10 @@
 extern UART_HandleTypeDef huart1;
 extern UART_HandleTypeDef huart2;
 extern queue8_t uart_queue;
+
+uint8_t canTxData[8];
+uint32_t	TxMailBox;
+
 /* USER CODE END Variables */
 osThreadId defaultTaskHandle;
 osThreadId rfidExecuteHandle;
@@ -161,7 +165,7 @@ void StartRfidExecute(void const * argument)
   for(;;)
   {
 	HAL_UART_Transmit(&huart1, read_tag_single_time, sizeof(read_tag_single_time), HAL_MAX_DELAY);
-    osDelay(1000);
+    osDelay(600);
   }
   /* USER CODE END StartRfidExecute */
 }
@@ -186,10 +190,11 @@ void StartTransmitTask(void const * argument)
 		transmitData();
 		}
 	}
-    osDelay(1);
- }
-  /* USER CODE END StartTransmitTask */
 
+    osDelay(1);
+
+  /* USER CODE END StartTransmitTask */
+}
 
 /* Private application code --------------------------------------------------*/
 /* USER CODE BEGIN Application */

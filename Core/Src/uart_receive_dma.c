@@ -70,7 +70,10 @@ void read_rfid_number(){
 void transmitData(){
 	int i=0;
 	while(rfid_number[i][0] != 0){
+		//computer
 		HAL_UART_Transmit(&huart2, rfid_number[i], sizeof(rfid_number[i]), 500);
+		//esp32
+		HAL_UART_Transmit(&huart3, rfid_number[i], sizeof(rfid_number[i]), 500);
 		i++;
 		}
 	memset(rfid_number,0,sizeof(rfid_number));
